@@ -1,7 +1,13 @@
 pipeline {
-  agent any
+  agent {
+    dockerfile {
+      filename 'Dockerfile'
+      additionalBuildArgs '-v /var/run/docker.sock:/var/run/docker.sock'
+    }
+    
+  }
   stages {
-    stage('Party Time!') {
+    stage('Stage One') {
       steps {
         sh 'id'
       }
