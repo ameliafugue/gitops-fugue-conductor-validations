@@ -1,7 +1,7 @@
 pipeline {
   agent {
-    docker {
-      image 'ubuntu:latest'
+    docker.withRegistry("https://225195660222.dkr.ecr.us-east-1.amazonaws.com/fugue/client") {
+      image 'fugue/client:latest'
       args '-v /var/run/docker.sock:/var/run/docker.sock'
     }
     
@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Stage One') {
       steps {
-        sh 'id'
+        sh 'fugue'
       }
     }
   }
