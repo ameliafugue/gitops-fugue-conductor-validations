@@ -1,13 +1,24 @@
 node {
+
+  /* Checkout git repo */
   checkout scm
 
-  /* Pull docker container from ECR */
+  /* Use Amazon ECR repo */
   docker.withRegistry("https://225195660222.dkr.ecr.us-east-1.amazonaws.com/fugue/client", "ecr:us-east-1:ecsrepo" ) {
+
+    /* Pull the fugue client docker container from ECR */
     docker.image("225195660222.dkr.ecr.us-east-1.amazonaws.com/fugue/client:latest").inside {
+
+      /* Set our AWS region */
       withEnv(["AWS_DEFAULT_REGION=us-east-1"]) {
+
+        /* Set our Fugue credentials */
         withCredentials([string(credentialsId: 'FUGUE_USER_NAME', variable: 'FUGUE_USER_NAME'), 
                          string(credentialsId: 'FUGUE_USER_SECRET', variable: 'FUGUE_USER_SECRET')]) {
+
+          /* Get Fugue status */
           sh "fugue status"
+
         }
       }
     }
