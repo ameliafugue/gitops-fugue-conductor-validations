@@ -17,8 +17,9 @@ node {
                          string(credentialsId: 'FUGUE_USER_SECRET', variable: 'FUGUE_USER_SECRET')]) {
 
           /* Apply Best Practice policy to the Fugue Conductor */
-          sh(script: 'fugue policy validation-add Policy/BestPractices.lw --name BestPractices', returnStatus: true)
-
+          sh 'printenv'
+          def ret = sh(script: 'fugue policy validation-add Policy/BestPractices.lw --name BestPractices', returnStdout: true)
+          echo "$ret"
         }
       }
     }
