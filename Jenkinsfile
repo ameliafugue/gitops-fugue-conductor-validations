@@ -19,7 +19,6 @@ node {
           /* Apply Best Practice policy to the Fugue Conductor */
           sh 'printenv'
           def ret = sh(script: 'fugue policy validation-add Policy/BestPractices.lw --name BestPractices', returnStdout: true)
-          echo "$ret"
         }
       }
     }
