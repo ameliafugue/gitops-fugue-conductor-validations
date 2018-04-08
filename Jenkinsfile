@@ -16,9 +16,13 @@ node {
         withCredentials([string(credentialsId: 'FUGUE_USER_NAME', variable: 'FUGUE_USER_NAME'), 
                          string(credentialsId: 'FUGUE_USER_SECRET', variable: 'FUGUE_USER_SECRET')]) {
 
-          /* Apply Best Practice policy to the Fugue Conductor */
-          sh 'printenv'
-          def ret = sh(script: 'fugue policy validation-add Policy/BestPractices.lw --name BestPractices', returnStdout: true)
+          /* Apply policy to the Fugue Conductor */
+          def ret = sh(script: 'fugue policy validation-remove BestPractices -y', returnStatus: true)
+          if(ret == 0) {
+            sh(script: 'fugue policy validation-add Policy/BestPractices.lw --name BestPractices', returnStatus: true)
+          } else {
+            sh(script: 'fugue policy validation-add Policy/BestPractices.lw --name BestPractices', returnStatus: true)
+          }
         }
       }
     }
