@@ -16,8 +16,8 @@ node {
         withCredentials([string(credentialsId: 'FUGUE_USER_NAME', variable: 'FUGUE_USER_NAME'), 
                          string(credentialsId: 'FUGUE_USER_SECRET', variable: 'FUGUE_USER_SECRET')]) {
 
-          /* Get Fugue status */
-          sh "fugue status"
+          /* Apply Best Practice policy to the Fugue Conductor */
+          fugue policy validation-add Policy/BestPractices.lw --name BestPractices
 
         }
       }
