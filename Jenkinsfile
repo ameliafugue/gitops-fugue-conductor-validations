@@ -18,7 +18,7 @@ node {
 
           /* Validate that the policy compiles */
           stage("Validate Policy") {
-            def cmdStatusCode = sh(script: "make", returnStatus: true)
+            def cmdStatusCode = sh(script: "lwc Policy/BestPractices.lw", returnStatus: true)
             if(cmdStatusCode == 0) {
               echo("it works yo")
             } else {
