@@ -16,12 +16,14 @@ node {
         withCredentials([string(credentialsId: "FUGUE_USER_NAME", variable: "FUGUE_USER_NAME"),
                          string(credentialsId: "FUGUE_USER_SECRET", variable: "FUGUE_USER_SECRET")]) {
 
-          /* Apply policy to the Fugue Conductor */
-          def cmdStatusCode = sh(script: "fugue policy validation-remove BestPractices -y", returnStatus: true)
-          if(cmdStatusCode == 0) {
-            sh(script: "fugue policy validation-add Policy/BestPractices.lw --name BestPractices", returnStatus: true)
-          } else {
-            sh(script: "fugue policy validation-add Policy/BestPractices.lw --name BestPractices", returnStatus: true)
+          stage("asdf") {
+            /* Apply policy to the Fugue Conductor */
+            def cmdStatusCode = sh(script: "fugue policy validation-remove BestPractices -y", returnStatus: true)
+            if(cmdStatusCode == 0) {
+              sh(script: "fugue policy validation-add Policy/BestPractices.lw --name BestPractices", returnStatus: true)
+            } else {
+              sh(script: "fugue policy validation-add Policy/BestPractices.lw --name BestPractices", returnStatus: true)
+            }
           }
         }
       }
