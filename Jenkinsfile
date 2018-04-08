@@ -18,12 +18,7 @@ node {
 
           /* Validate that the policy compiles */
           stage("Validate Policy") {
-            def cmdStatusCode = sh(script: "lwc Policy/BestPractices.lw", returnStatus: true)
-            if(cmdStatusCode == 0) {
-              echo("it works yo")
-            } else {
-              echo("sad face")
-            }
+            sh(script: "lwc Policy/BestPractices.lw")
           }
 
           /* Apply policy to the Fugue Conductor */
@@ -34,7 +29,6 @@ node {
             } else {
               sh(script: "fugue policy validation-add Policy/BestPractices.lw --name BestPractices", returnStatus: true)
             }
-
           }
         }
       }
