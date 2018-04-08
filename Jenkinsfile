@@ -1,7 +1,7 @@
 node {
 
   /* Checkout git repo */
-  checkout scm
+  checkout(scm)
 
   /* Use Amazon ECR repo */
   docker.withRegistry("https://225195660222.dkr.ecr.us-east-1.amazonaws.com/fugue/client", "ecr:us-east-1:ecsrepo" ) {
@@ -17,7 +17,7 @@ node {
                          string(credentialsId: 'FUGUE_USER_SECRET', variable: 'FUGUE_USER_SECRET')]) {
 
           /* Apply Best Practice policy to the Fugue Conductor */
-          fugue policy validation-add Policy/BestPractices.lw --name BestPractices
+          sh(script: 'fugue policy validation-add Policy/BestPractices.lw --name BestPractices', returnStatus: true)
 
         }
       }
