@@ -20,7 +20,7 @@ node {
 
           /* Validate that the policy compiles */
           stage("Validate Policy") {
-            sh(script: "lwc Policy/BestPractices.lw")
+            sh(script: "lwc Policy/AWSCISFoundationsBenchmark.lw")
           }
 
           /* Apply policy to the Fugue Conductor */
