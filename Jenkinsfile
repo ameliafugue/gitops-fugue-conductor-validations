@@ -28,9 +28,9 @@ node {
           stage("Apply Policy") {
             def cmdStatusCode = sh(script: "fugue policy validation-remove AWSCISBenchmarks -y", returnStatus: true)
             if(cmdStatusCode == 0) {
-              sh(script: "fugue policy validation-add Policy/AWSCISFoundationsBenchmark.lw --name AWSCISBenchmarks", returnStatus: true)
+              sh(script: "fugue policy validation-add Policy/AWSCISFoundationsBenchmark.lw --name AWSCISBenchmarks")
             } else {
-              sh(script: "fugue policy validation-add Policy/AWSCISFoundationsBenchmark.lw --name AWSCISBenchmarks", returnStatus: true)
+              sh(script: "fugue policy validation-add Policy/AWSCISFoundationsBenchmark.lw --name AWSCISBenchmarks")
             }
           }
         }
