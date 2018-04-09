@@ -24,13 +24,13 @@ node {
           }
 
           /* Apply policy to the Fugue Conductor */
-          /* TO DO: Write validation-remove output to file and check for errror */
+          /* TO DO: Write validation-remove output to file and check for error */
           stage("Apply Policy") {
-            def cmdStatusCode = sh(script: "fugue policy validation-remove BestPractices -y", returnStatus: true)
+            def cmdStatusCode = sh(script: "fugue policy validation-remove AWSCISBenchmarks -y", returnStatus: true)
             if(cmdStatusCode == 0) {
-              sh(script: "fugue policy validation-add Policy/BestPractices.lw --name BestPractices", returnStatus: true)
+              sh(script: "fugue policy validation-add Policy/AWSCISFoundationsBenchmark.lw --name AWSCISBenchmarks", returnStatus: true)
             } else {
-              sh(script: "fugue policy validation-add Policy/BestPractices.lw --name BestPractices", returnStatus: true)
+              sh(script: "fugue policy validation-add Policy/AWSCISFoundationsBenchmark.lw --name AWSCISBenchmarks", returnStatus: true)
             }
           }
         }
