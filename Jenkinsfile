@@ -1,7 +1,9 @@
 node {
 
   /* Setup our environment */
-  withEnv(["AWS_DEFAULT_REGION=us-east-1"]) {
+  withEnv(["AWS_DEFAULT_REGION=us-east-1",
+           "FUGUE_RBAC_DO_AS=1",
+           "FUGUE_LWC_OPTIONS=true"]) {
 
     /* Checkout git repo */
     checkout(scm)
@@ -22,6 +24,7 @@ node {
           }
 
           /* Apply policy to the Fugue Conductor */
+          /* TO DO: Write validation-remove output to file and check for errror */
           stage("Apply Policy") {
             def cmdStatusCode = sh(script: "fugue policy validation-remove BestPractices -y", returnStatus: true)
             if(cmdStatusCode == 0) {
